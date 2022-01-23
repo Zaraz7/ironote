@@ -5,8 +5,35 @@
     <title>IroNote</title>
   </head>
   <body>
-    <header>Работает</header>
-    <main></main>
+    <header></header>
+    <main>
+      <div class='Api'>API:</div>
+      <div class='App'>APP:</div>
+    </main>
     <footer></footer>
+    <script>
+          function addTextInDivElement(className="div.any", text){
+            document.querySelector(className).appendChild(document.createTextNode(text))
+          }
+        window.onload = function() {
+          fetch('http://127.0.0.1:5000/help')
+            .then((response) => {
+              return response.json();
+            })
+            .then(data => {
+              console.log(data);
+              addTextInDivElement("div.App", data.status)
+            })
+
+          fetch('http://127.0.0.1:5000/StatusApi')
+            .then((response) => {
+              return response.json();
+            })
+            .then(data => {
+              console.log(data);
+              addTextInDivElement("div.Api", data.status)
+            })
+        }
+    </script>
   </body>
 </html>
