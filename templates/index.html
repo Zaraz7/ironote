@@ -5,18 +5,47 @@
     <title>IroNote</title>
   </head>
   <body>
-    <header></header>
+    <header>
+
+    </header>
+
     <main>
       <div class='Api'>API:</div>
       <div class='App'>APP:</div>
+      
     </main>
-    <footer></footer>
+
+    <footer>
+
+    </footer>
     <script>
+        async function postMetod(){
+          const url = './help';
+          const data = { username: 'example' };
+
+          try {
+            const response = await fetch(url, {
+              method: 'POST', // или 'PUT'
+              body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+            const json = await response.json();
+            console.log('Успех:', JSON.stringify(json));
+            
+          } catch (error) {
+            console.error('Ошибка:', error);
+          }
+        }
+
+
           function addTextInDivElement(className="div.any", text){
             document.querySelector(className).appendChild(document.createTextNode(text))
           }
+
         window.onload = function() {
-          fetch('http://127.0.0.1:5000/help')
+          fetch('./help')
             .then((response) => {
               return response.json();
             })
@@ -25,7 +54,7 @@
               addTextInDivElement("div.App", data.status)
             })
 
-          fetch('http://127.0.0.1:5000/StatusApi')
+          fetch('./StatusApi')
             .then((response) => {
               return response.json();
             })
@@ -35,5 +64,6 @@
             })
         }
     </script>
+    <input value="Test button" onclick="postMetod()" type="button">
   </body>
 </html>
