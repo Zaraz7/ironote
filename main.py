@@ -1,15 +1,28 @@
-from http.client import responses
-from urllib import response
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_restful import Resource, Api
 
 
 app = Flask(__name__)
 api = Api(app)
 
+class Login(Resource):
+    def get(self):
+        return {"test GET": "OK"}
+
+    def post(self): # take {login:str, password:str}
+        respons_ = request.json
+        
+        respons_["login"]
+        respons_["password"]
+
+        return {"rederect": "ok", "url" : "./"}
+
+api.add_resource(Login, '/Login')
+
 class StatusApi(Resource):
     def get(self):
-        return {"status" : "Алекс лох"}
+        return {"status" : "ok"}
+
 api.add_resource(StatusApi, '/StatusApi')
 
 class GetHelp(Resource):
@@ -22,8 +35,14 @@ class GetHelp(Resource):
 
 api.add_resource(GetHelp, '/help')
 
+# -- -==- -- | -- -==- -- 
+
+@app.route('/TestRequests')
+def TestRequests():
+    return render_template('TestRequests.html')
+
 @app.route('/')
-def index():
+def LoginUp():
     return render_template('index.html')
 
 if __name__ == '__main__':

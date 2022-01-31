@@ -1,12 +1,13 @@
 from tkinter import *
-from sqlite_controller import *
+from DB_controller import *
 
-path = './BD_PASS.sqlite'
+path = './DB_PASS.sqlite'
 
 try:
     open(path)
 except:
     create_bd(False, path)
+
 
 connect = create_connection(path)
 

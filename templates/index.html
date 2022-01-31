@@ -5,23 +5,46 @@
     <title>IroNote</title>
   </head>
   <body>
-    <header>
 
-    </header>
+    <style>
+      .formSingUp{
+        margin-top: 200px;
+        display: flex;
+        justify-content: center;
+      }
+      .columnForm{
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
 
-    <main>
-      <div class='Api'>API:</div>
-      <div class='App'>APP:</div>
-      
-    </main>
+    <div class="formSingUp" >
+    <div>
+      <div class='columnForm'>
+        Login:
+        <input value="" type="search" id='input_login'>
+        Password:
+        <input value="" type="search" id='input_passw'>
+      </div>
 
-    <footer>
+      <input value="Sing Up" onclick="SingUpMetod()" type="button" style="margin: 0 auto; display: flex;"> 
+    </div>
+      <script>
 
-    </footer>
-    <script>
-        async function postMetod(){
-          const url = './help';
-          const data = { username: 'example' };
+        function getValue(idElement){
+          anyV = document.getElementById(idElement).value
+          document.getElementById(idElement).value = ''
+          return anyV
+        }
+
+         async function SingUpMetod(){
+
+          login = getValue('input_login')
+          passw = getValue('input_passw')
+
+
+          const url = './Login';
+          const data = { "login" :  login, "password" : passw};
 
           try {
             const response = await fetch(url, {
@@ -32,38 +55,19 @@
               }
             });
             const json = await response.json();
+
             console.log('Успех:', JSON.stringify(json));
+
+            if(json.rederect === "ok"){
+              document.location.href = json.url
+            }
             
           } catch (error) {
             console.error('Ошибка:', error);
           }
         }
+      </script>
+    </div>
 
-
-          function addTextInDivElement(className="div.any", text){
-            document.querySelector(className).appendChild(document.createTextNode(text))
-          }
-
-        window.onload = function() {
-          fetch('./help')
-            .then((response) => {
-              return response.json();
-            })
-            .then(data => {
-              console.log(data);
-              addTextInDivElement("div.App", data.status)
-            })
-
-          fetch('./StatusApi')
-            .then((response) => {
-              return response.json();
-            })
-            .then(data => {
-              console.log(data);
-              addTextInDivElement("div.Api", data.status)
-            })
-        }
-    </script>
-    <input value="Test button" onclick="postMetod()" type="button">
   </body>
 </html>
