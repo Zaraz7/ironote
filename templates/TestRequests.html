@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>IroNote</title>
+  </head>
+  <body>
+
+    <header>
+      <div class='Api'>API:</div>
+      <div class='App'>APP:</div>
+    </header>
+
+    <input value="rederect" onclick="rederect(url)" type="button">
+
+    <script type="text/javascript">
+      url = "./"
+
+      function rederect(url){
+        document.location.replace(url);
+      }
+    </script>
+
+    <script>
+          function addTextInDivElement(className="div.any", text){
+            document.querySelector(className).appendChild(document.createTextNode(text))
+          }
+
+        window.onload = function() {
+          fetch('./help')
+            .then((response) => {
+              return response.json();
+            })
+            .then(data => {
+              
+              addTextInDivElement("div.App", data.status)
+            })
+
+          fetch('./StatusApi')
+            .then((response) => {
+              return response.json();
+            })
+            .then(data => {
+              
+              addTextInDivElement("div.Api", data.status)
+            })
+        }
+    </script>
+
+    <div>
+      <input value="" type="search" id='input_test'>
+      <br><input value="Test POST button" onclick="postMetod()" type="button">
+      <br><input value="Test GET button" onclick="GetMetod()" type="button">
+      
+      <script>
+        async function postMetod(){
+          test_d = document.getElementById('input_test').value
+          document.getElementById('input_test').value = ''
+
+          const url = './TestApi';
+          const data = { "test POST": test_d };
+
+          try {
+            const response = await fetch(url, {
+              method: 'POST', // или 'PUT'
+              body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+            const json = await response.json();
+            console.log('Успех:', JSON.stringify(json));
+            
+          } catch (error) {
+            console.error('Ошибка:', error);
+          }
+        }
+
+        async function GetMetod(){
+            const url = './TestApi';
+
+            try {
+              const response = await fetch(url, {
+                method: 'GET', // или 'PUT'
+              });
+
+              const json = await response.json();
+              console.log('Успех:', JSON.stringify(json));
+              
+            } catch (error) {
+              console.error('Ошибка:', error);
+            }
+          }
+      </script>
+    </div>
+  </body>
+</html>
