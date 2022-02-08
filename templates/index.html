@@ -1,23 +1,5 @@
-<!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <title>IroNote</title>
-  </head>
-  <body>
-
-    <style>
-      .formSingUp{
-        margin-top: 200px;
-        display: flex;
-        justify-content: center;
-      }
-      .columnForm{
-        display: flex;
-        flex-direction: column;
-      }
-    </style>
-
+{% extends "base.html" %}
+{% block content %}
     <div class="formSingUp" >
     <div>
       <div class='columnForm'>
@@ -68,6 +50,4 @@
         }
       </script>
     </div>
-
-  </body>
-</html>
+{% endblock %}
