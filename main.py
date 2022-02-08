@@ -47,7 +47,10 @@ def LoginUp():
 
 @app.route('/editor/<note_page>')
 def editor(note_page):
-    return render_template('editor.html', user_name='Test User', notes_list=['Test', 'test2', 'Тест'], note_page=note_page)
+    return render_template(
+        'editor.html', user_name='Test User', 
+        notes_list=[{'name':'Test', 'url':'Test'}, {'name':'test2', 'url':'test2'}],
+        note_page=note_page)
 
 if __name__ == '__main__':
     app.debug = True

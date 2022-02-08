@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>IroNote Editor</title>
+    <link type="text/css" href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet"/>
   </head>
   <body>
 
     <h1>Hello, {{ user_name }}</h1>
     <ul>{% for note in notes_list %}
-        <li>{{note}}</li>
+        <li><a href="{{note.url}}">{{note.name}}</a></li>
         {% endfor %}
     </ul>
     <p>{{note_page}}</p>
