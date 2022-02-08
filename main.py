@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, url_for
 from flask_restful import Resource, Api
 
 
@@ -45,9 +45,9 @@ def TestRequests():
 def LoginUp():
     return render_template('index.html')
 
-@app.route('/editor')
-def Editor():
-    return render_template('editor.html', user_name='Test User')
+@app.route('/editor/<note_page>')
+def editor(note_page):
+    return render_template('editor.html', user_name='Test User', notes_list=['Test', 'test2', 'Тест'], note_page=note_page)
 
 if __name__ == '__main__':
     app.debug = True

@@ -6,7 +6,12 @@
   </head>
   <body>
 
-    <h1>Hello {{ user_name }}</h1>
-
+    <h1>Hello, {{ user_name }}</h1>
+    <ul>{% for note in notes_list %}
+        <li>{{note}}</li>
+        {% endfor %}
+    </ul>
+    <p>{{note_page}}</p>
+    
   </body>
 </html>
