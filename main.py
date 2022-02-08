@@ -45,6 +45,10 @@ def TestRequests():
 def LoginUp():
     return render_template('index.html')
 
+@app.route('/editor')
+def Editor():
+    return render_template('editor.html', user_name='Test User')
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host = '0.0.0.0',port=5005)
